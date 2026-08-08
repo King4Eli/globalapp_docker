@@ -1,8 +1,0 @@
-name: global_apps
-services:
-  global_mysql:
-    ports:
-      - "3306:3306"
-  
-  globalapp_pma:
-    restart: unless-stopped
