@@ -44,7 +44,13 @@ sshStartRun=$(jq -r --arg img "$imageName" '.[$img].ssh.start' "$CONFIG")
 sshUsername=$(jq -r --arg img "$imageName" '.[$img].ssh.username' "$CONFIG")
 sshServer=$(jq -r --arg img "$imageName" '.[$img].ssh.server' "$CONFIG")
 sshPath=$(jq -r --arg img "$imageName" '.[$img].ssh.path' "$CONFIG")
-sshCommand=$(jq -r --arg img "$imageName" '.[$img].ssh.command' "$CONFIG")
+# .ssh.command: string (legacy) or array, joined with && after trimming trailing `;`.
+sshCommand=$(jq -r --arg img "$imageName" \
+    '.[$img].ssh.command
+     | if type == "array"
+       then map(sub("[;[:space:]]+$"; "")) | join(" && ")
+       else . end' \
+    "$CONFIG")
 
 docker build \
     -t "$username/$imageName:$version" \
@@ -74,10 +80,10 @@ fi
 #     },
 #     "ssh": {
 #       "start": true,
-#       "username": "suyoapp_com",
-#       "server": "84.13.15.61",
-#       "path": "$HOME/proj/suyoapp_com",
-#       "command": "docker compose -p suyoapp_com up -d --pull always suyoapp_com_webui"
+#       "username": "server_username",
+#       "server": "192.168.15.61",
+#       "path": "$HOME/proj/app_1",
+#       "command": "export APP_VERSION=1.0.0 docker compose pull && docker compose up mail_justu_server -d"
 #     }
 #   },
 # }
