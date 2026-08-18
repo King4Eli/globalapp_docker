@@ -6,6 +6,10 @@ listImages=false
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -i)
+            if [[ -z "${2:-}" ]]; then
+                echo "Usage: $0 [-l|--list] [-i <imageName>]"
+                exit 1
+            fi
             imageName="$2"
             shift 2
             ;;
