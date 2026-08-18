@@ -26,8 +26,14 @@ if $listImages; then
 fi
 
 if [[ -z "$imageName" ]]; then
-    echo "Usage: $0 [-l|--list] [-i <imageName>]"
-    exit 1
+    imageCount=$(jq -r 'keys | length' "$CONFIG")
+    if [[ "$imageCount" -eq 1 ]]; then
+        imageName=$(jq -r 'keys[0]' "$CONFIG")
+    else
+        echo "Multiple images found in $CONFIG -- specify one with: $0 -i <imageName>"
+        jq -r 'keys[]' "$CONFIG"
+        exit 1
+    fi
 fi
 
 # Verify the key exists
