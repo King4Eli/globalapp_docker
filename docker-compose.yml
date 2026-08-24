@@ -10,22 +10,7 @@ services:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
     ports:
-      - "3306:3306"
-
-  global_minio:
-    image: minio/minio
-    container_name: global_minio
-    command: server /data --console-address ":9001"
-    restart: unless-stopped
-    env_file:
-      - .env/minio.env
-    volumes:
-      - miniodata:/data
-    networks:
-      - shared-global-network
-    expose:
-      - "9001"
-      - "9000"
+      - "10.50.0.1:3306:3306"
 
   globalapp_nginxPM:
     image: jc21/nginx-proxy-manager:latest
@@ -38,23 +23,14 @@ services:
     volumes:
       - nginx_pm_data:/data
       - nginx_pm_letsencrypt:/etc/letsencrypt
-    networks:
-      - shared-global-network
 
 volumes:
   mysql_data :
     external: true
     name: global_apps_mysql_data
-  miniodata:
-    external: true
-    name: global_apps_miniodata
   nginx_pm_data:
     external: true
     name: global_apps_nginx_pm_data
   nginx_pm_letsencrypt:
     external: true
     name: global_apps_nginx_pm_letsencrypt
-
-networks:
-  shared-global-network:
-    external: true

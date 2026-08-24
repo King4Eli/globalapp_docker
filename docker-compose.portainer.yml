@@ -6,16 +6,12 @@ services:
     restart: unless-stopped
     expose:
       - "8000"
-      - "9000"
       - "9443"
-    networks:
-      - shared-global-network
+    ports:
+      - "10.50.0.1:102:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
 volumes:
   portainer_data:
-networks:
-  shared-global-network:
-    external: true

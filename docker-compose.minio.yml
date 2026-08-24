@@ -1,0 +1,18 @@
+name: global_apps
+services:
+  global_minio:
+    image: minio/minio
+    container_name: global_minio
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+    env_file:
+      - .env/minio.env
+    volumes:
+      - miniodata:/data
+    expose:
+      - "9001"
+      - "9000"
+volumes:
+  miniodata:
+    external: true
+    name: global_apps_miniodata

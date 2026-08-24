@@ -5,10 +5,4 @@ services:
     container_name: global_redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
-    networks:
-      - shared-global-network
-      
-networks:
-  shared-global-network:
-    external: true
+      - "10.50.0.1:6379:6379"

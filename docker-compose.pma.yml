@@ -5,7 +5,7 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: globalapp_pma
     ports:
-      - "11300:80"
+      - "10.50.0.1:101:80"
     env_file:
       - .env/pma.env
     restart: unless-stopped
