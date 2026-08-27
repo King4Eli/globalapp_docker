@@ -25,9 +25,7 @@ services:
       - nginx_pm_letsencrypt:/etc/letsencrypt
 
 volumes:
-  mysql_data :
-    external: true
-    name: global_apps_mysql_data
+  mysql_data:
   nginx_pm_data:
     external: true
     name: global_apps_nginx_pm_data
