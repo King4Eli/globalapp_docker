@@ -12,23 +12,19 @@ services:
     ports:
       - "10.50.0.1:3306:3306"
 
-  globalapp_nginxPM:
+  globalapp_nginx:
     image: jc21/nginx-proxy-manager:latest
-    container_name: globalapp_nginxPM
+    container_name: globalapp_nginx
     restart: unless-stopped
     ports:
       - "80:80"
       - "81:81"
       - "443:443"
     volumes:
-      - nginx_pm_data:/data
-      - nginx_pm_letsencrypt:/etc/letsencrypt
+      - nginx_data:/data
+      - nginx_letsencrypt:/etc/letsencrypt
 
 volumes:
   mysql_data:
-  nginx_pm_data:
-    external: true
-    name: global_apps_nginx_pm_data
-  nginx_pm_letsencrypt:
-    external: true
-    name: global_apps_nginx_pm_letsencrypt
+  nginx_data:
+  nginx_letsencrypt:
