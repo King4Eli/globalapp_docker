@@ -1,14 +1,15 @@
-name: global_apps
+name: globalapp
+
 services:
-  global_portainer:
+  portainer:
     image: portainer/portainer-ce:latest
-    container_name: global_portainer
+    container_name: portainer
     restart: unless-stopped
     expose:
       - "8000"
       - "9443"
     ports:
-      - "10.50.0.1:102:9000"
+      - "10.50.0.1:9011:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
