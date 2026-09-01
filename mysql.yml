@@ -1,0 +1,15 @@
+name: global_apps
+
+services:
+  global_mysql:
+    image: mysql:8.0
+    container_name: global_mysql
+    env_file:
+      - .env/mysql.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+    ports:
+      - "10.50.0.1:3306:3306"
+volumes:
+  mysql_data:
