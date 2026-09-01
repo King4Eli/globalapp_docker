@@ -1,4 +1,4 @@
-name: global_apps
+name: globalapp
 
 services:
   registry:
