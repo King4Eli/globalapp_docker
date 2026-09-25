@@ -1,9 +1,17 @@
-name: globalapp
+name: global_apps
 
 services:
-  redis:
+  global_redis:
+    container_name: global_redis
     image: redis:7-alpine
-    container_name: redis
     restart: unless-stopped
+    env_file:
+      - ._env/redis.env
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    volumes:
+      - redis_data:/data
     ports:
       - "10.50.0.1:6379:6379"
+
+volumes:
+  redis_data:

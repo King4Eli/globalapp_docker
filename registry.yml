@@ -1,9 +1,12 @@
 name: globalapp
 
 services:
-  registry:
+  global_registry:
+    container_name: global_registry
     image: registry:2
     restart: unless-stopped
+    env_file:
+      - ._env/registry.env
     ports:
       - "10.50.0.1:9012:5000"
     volumes:

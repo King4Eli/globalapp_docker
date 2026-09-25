@@ -1,9 +1,9 @@
-name: globalapp
+name: global_apps
 
 services:
-  nginx:
+  global_nginx:
+    container_name: global_nginx
     image: jc21/nginx-proxy-manager:latest
-    container_name: nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -12,6 +12,7 @@ services:
     volumes:
       - nginx_data:/data
       - nginx_letsencrypt:/etc/letsencrypt
+
 volumes:
   nginx_data:
   nginx_letsencrypt:

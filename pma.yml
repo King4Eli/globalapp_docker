@@ -2,10 +2,10 @@ name: globalapp
 
 services:
   global_pma:
+    container_name: global_pma
     image: phpmyadmin/phpmyadmin
-    container_name: pma
     ports:
       - "10.50.0.1:3307:80"
     env_file:
-      - .env/pma.env
+      - ._env/pma.env
     restart: unless-stopped
