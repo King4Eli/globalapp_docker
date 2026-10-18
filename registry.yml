@@ -1,4 +1,4 @@
-name: globalapp
+name: global_apps
 
 services:
   global_registry:

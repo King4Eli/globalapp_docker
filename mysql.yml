@@ -10,7 +10,7 @@ services:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
     ports:
-      - "10.50.0.1:3306:3306"
+      - "10.50.0.2:3306:3306"
 
 volumes:
   mysql_data:
